@@ -92,6 +92,7 @@ class JmefPlugin extends GenericPlugin {
 
         $page = & $args[0];
         $op = & $args[1];
+        $handler = & $args[3];
 
         if ($page == 'jmef') {
             // Construct a path to look for
@@ -101,9 +102,7 @@ class JmefPlugin extends GenericPlugin {
             if ($ops = $request->getRequestedArgs())
                 $path .= '/' . implode('/', $ops);
 
-            // It is -- attach the jmef handler.
-            define('HANDLER_CLASS', JmefHandler::class);
-//            $this->import('JmefHandler');
+            $handler = new JmefHandler($this);
 
             return true;
         }
@@ -129,7 +128,6 @@ class JmefPlugin extends GenericPlugin {
      */
     function getActions($request, $verb) {
         $router = $request->getRouter();
-        import('lib.pkp.classes.linkAction.request.AjaxModal');
         return array_merge(
                 $this->getEnabled() ? array(
             new LinkAction(

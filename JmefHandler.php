@@ -164,13 +164,14 @@ class JmefHandler extends Handler {
      */
     function _createContextJmef($request) {
         $doc = "<?xml version=\"1.0\" encoding=\"utf-8\"?>\n";
-        $context = $request->getJournal();
+        $context = $request->getJournal();    
+        
         $baseUrl = $request->getDispatcher()->url(
                 $request,
                 ROUTE_PAGE,
                 $context->getPath()
         );
-
+        
         $doc .= "<journal xmlns:xlink=\"http://www.w3.org/1999/xlink\">\n";
 
         /* Journal IDs */
