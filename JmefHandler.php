@@ -18,10 +18,11 @@ namespace APP\plugins\generic\jmef;
 use APP\handler\Handler;
 
 class JmefHandler extends Handler {
+
     var $_languages = array(
         "ar" => array("Arabic", "ARA", "AR"),
         "az" => array("Azerbaijani", "AZE", "AZ"),
-        "be@cyrillic"=> array("Belarusian (Cyrillic)", "BEL", "BE"),
+        "be@cyrillic" => array("Belarusian (Cyrillic)", "BEL", "BE"),
         "bg" => array("Bulgarian", "BUL", "BG"),
         "bs" => array("Bosnian", "BOS", "BS"),
         "ca" => array("Catalan", "CAT", "CA"),
@@ -78,21 +79,20 @@ class JmefHandler extends Handler {
         "sk" => array("Slovak", "SLK", "SK"),
         "sl" => array("Slovenian", "SLV", "SL"),
         "sq" => array("Albanian", "SQI", "SQ"),
-        "sr@cyrillic"=> array("Serbian (Cyrillic)", "SRP", "SR"),
-        "sr@latin"  => array("Serbian (Latin)", "SRP", "SR"),
+        "sr@cyrillic" => array("Serbian (Cyrillic)", "SRP", "SR"),
+        "sr@latin" => array("Serbian (Latin)", "SRP", "SR"),
         "sv" => array("Swedish", "SWE", "SV"),
         "th" => array("Thai", "THA", "TH"),
         "tr" => array("Turkish", "TUR", "TR"),
         "uk" => array("Ukrainian", "UKR", "UK"),
         "und" => array("Undetermined", "UND", ""),
         "ur" => array("Urdu", "URD", "UR"),
-        "uz@cyrillic"=> array("Uzbek (Cyrillic)", "UZB", "UZ"),
-        "uz@latin"  => array("Uzbek (Latin)", "UZB", "UZ"),
+        "uz@cyrillic" => array("Uzbek (Cyrillic)", "UZB", "UZ"),
+        "uz@latin" => array("Uzbek (Latin)", "UZB", "UZ"),
         "vi" => array("Vietnamese", "VIE", "VI"),
         "zh_CN" => array("Chinese (Simplified)", "ZHO", "ZH"),
         "zh_Hant" => array("Chinese (Traditional)", "ZHO", "ZH")
     );
-
     var $_oecdClassificationsList = array('1' => 'Natural Sciences',
         '1.01' => 'Natural sciences - Mathematics',
         '1.02' => 'Natural sciences - Computer and information sciences',
@@ -266,6 +266,12 @@ class JmefHandler extends Handler {
             }
             $doc .= "\t</publisher>\n";
         }
+        $journalOwner = trim($context->getData('journalOwner'));
+        if (isset($journalOwner)) {
+            $doc .= "\t<other-organization>\n";
+            $doc .= "\t\t<name>" . $journalOwner . "</name>\n";
+            $doc .= "\t</other-organization>\n";
+        }
         if ($otherOrganisations = trim($context->getData('otherOrganisations'))) {
             $otherOrganisationsExploded = explode(";", $otherOrganisations);
             foreach ($otherOrganisationsExploded as $organisation) {
@@ -286,7 +292,7 @@ class JmefHandler extends Handler {
         if ($allLanguages = $context->getSupportedSubmissionLocales()) {
             $doc .= "\t\t<languages>\n";
             foreach ($allLanguages AS $code) {
-                if($languages = $this->getLanguage($code)){
+                if ($languages = $this->getLanguage($code)) {
                     $doc .= "\t\t\t<language ";
                     if (sizeof($languages) >= 2 && $languages[1]) {
                         $doc .= "iso2=\"" . $languages[1] . "\" ";
@@ -369,5 +375,4 @@ class JmefHandler extends Handler {
         }
         return false;
     }
-
 }

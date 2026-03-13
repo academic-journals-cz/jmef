@@ -57,11 +57,17 @@ msgstr "Diamond Categories"
 msgid "plugins.generic.jmef.manager.settings.additionalMetadata"
 msgstr "Additional Journal Metadata"
 
+msgid "plugins.generic.jmef.manager.settings.journalOwner"
+msgstr "Journal owner"
+
+msgid "plugins.generic.jmef.manager.settings.journalOwner.description"
+msgstr "The owner of the journal, if it is different from the publisher."
+
 msgid "plugins.generic.jmef.manager.settings.otherOrganisations"
 msgstr "Other organisations"
 
 msgid "plugins.generic.jmef.manager.settings.otherOrganisations.description"
-msgstr "The owner of the journal, if it is different from the publisher, or other organisations associated with the journal, <strong>separated by ;</strong>"
+msgstr "Other organisations associated with the journal, <strong>separated by ;</strong>"
         
 msgid "plugins.generic.jmef.manager.settings.oecdClassification"
 msgstr "OECD 2007 Classification"
