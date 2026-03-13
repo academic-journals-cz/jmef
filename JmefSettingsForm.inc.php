@@ -22,6 +22,7 @@ class JmefSettingsForm extends Form {
         'journalDDH' => array('string', false),
         'journalDOAJ' => array('string', false),
         'publisherLocation' => array('string', false),
+        'journalOwner' => array('string', false),
         'otherOrganisations' => array('string', false),
         'scholarlyJournal' => array('bool', false),
         'communityOwned' => array('bool', false),

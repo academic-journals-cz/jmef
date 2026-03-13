@@ -75,7 +75,11 @@
                     {fbvElement type="select" label="plugins.generic.jmef.manager.settings.publisherLocation.description" name="publisherLocation" id="publisherLocation" defaultLabel="" defaultValue="" from=$countries selected=$publisherLocation translate="0" size=$fbvStyles.size.MEDIUM}
             {/fbvFormSection}
             
-            {fbvFormSection for="journalKeywords" title="plugins.generic.jmef.manager.settings.otherOrganisations"}
+            {fbvFormSection for="journalOwner" title="plugins.generic.jmef.manager.settings.journalOwner"}
+                {fbvElement type="text" label="plugins.generic.jmef.manager.settings.journalOwner.description" name="journalOwner" id="journalOwner" value=$journalOwner  size=$fbvStyles.size.LARGE}               
+            {/fbvFormSection}
+            
+            {fbvFormSection for="otherOrganisations" title="plugins.generic.jmef.manager.settings.otherOrganisations"}
                 {fbvElement type="text" label="plugins.generic.jmef.manager.settings.otherOrganisations.description" name="otherOrganisations" id="otherOrganisations" value=$otherOrganisations  size=$fbvStyles.size.LARGE}               
             {/fbvFormSection}
             

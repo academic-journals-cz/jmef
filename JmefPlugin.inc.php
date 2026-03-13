@@ -22,6 +22,7 @@ class JmefPlugin extends GenericPlugin {
         'journalDDH' => array('string', false),
         'journalDOAJ' => array('string', false),
         'publisherLocation' => array('string', false),
+        'journalOwner' => array('string', false),
         'otherOrganisations' => array('string', false),
         'scholarlyJournal' => array('boolean', false),
         'communityOwned' => array('boolean', false),
@@ -158,7 +159,14 @@ class JmefPlugin extends GenericPlugin {
                 } else {
                     $organisationType = __('plugins.generic.jmef.diamond.organisationType.public');
                 }
-                $aboutText .= __('plugins.generic.jmeg.about.communityOwned', array('contextTitle' => $currentContext->getLocalizedData('name'), 'publisherInstitution' => $currentContext->getData('publisherInstitution'), 'organisationType' => $organisationType));
+                
+                if($context->getData('journalOwner') && trim($context->getData('journalOwner')) !=""){
+                    $journalOwner = trim($context->getData('journalOwner'));
+                } else {
+                    $journalOwner = $currentContext->getData('publisherInstitution');
+                }
+                
+                $aboutText .= __('plugins.generic.jmeg.about.communityOwned', array('contextTitle' => $currentContext->getLocalizedData('name'), 'publisherInstitution' => $journalOwner, 'organisationType' => $organisationType));
             }
             // Content update inside object
             $currentContext->setData('about', $aboutText, $currentLocale);

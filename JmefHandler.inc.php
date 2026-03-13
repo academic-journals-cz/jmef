@@ -241,6 +241,12 @@ class JmefHandler extends Handler {
                         "\t\t</location>\n";
             }
             $doc .= "\t</publisher>\n";
+            $journalOwner = trim($context->getData('journalOwner'));
+            if (isset($journalOwner)) {
+                $doc .= "\t<other-organization>\n";
+                    $doc .= "\t\t<name>" . $journalOwner . "</name>\n";
+                $doc .= "\t</other-organization>\n";
+            }
             if ($otherOrganisations = trim($context->getData('otherOrganisations'))) {
                 $otherOrganisationsExploded = explode(";", $otherOrganisations);
                 foreach ($otherOrganisationsExploded as $organisation) {
