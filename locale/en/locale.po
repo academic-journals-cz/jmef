@@ -27,15 +27,6 @@ msgstr "Journal's DOAJ ID"
 msgid "plugins.generic.jmef.manager.settings.journalDoaj.description" 
 msgstr "If the journal is in DOAJ, please enter the DOAJ ID number."
 
-msgid "plugins.generic.jmef.manager.settings.publisherLocation" 
-msgstr "Publisher location"
-
-msgid "plugins.generic.jmef.manager.settings.publisherName" 
-msgstr "You have filled this publisher name in the settings: <strong>{$publisherName}</strong>"
-
-msgid "plugins.generic.jmef.manager.settings.publisherLocation.description" 
-msgstr "Select the country where the publisher is based."
-
 msgid "plugins.generic.jmef.manager.settings.keywords" 
 msgstr "Journal keywords"
 

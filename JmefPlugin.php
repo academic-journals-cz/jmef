@@ -34,7 +34,6 @@ class JmefPlugin extends GenericPlugin {
         'journalDOI' => array('string', false),
         'journalDDH' => array('string', false),
         'journalDOAJ' => array('string', false),
-        'publisherLocation' => array('string', false),
         'journalOwner' => array('string', false),
         'otherOrganisations' => array('string', false),
         'scholarlyJournal' => array('boolean', false),

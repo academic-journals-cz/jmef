@@ -25,7 +25,6 @@ class JmefSettingsForm extends Form {
         'journalDOI' => array('string', false),
         'journalDDH' => array('string', false),
         'journalDOAJ' => array('string', false),
-        'publisherLocation' => array('string', false),
         'journalOwner' => array('string', false),
         'otherOrganisations' => array('string', false),
         'scholarlyJournal' => array('bool', false),
@@ -133,17 +132,9 @@ class JmefSettingsForm extends Form {
     function fetch($request, $template = null, $display = false) {
         $templateMgr = TemplateManager::getManager($request);
 
-        $isoCodes = new \Sokil\IsoCodes\IsoCodesFactory();
-        $countries = array();
-        foreach ($isoCodes->getCountries() as $country) {
-            $countries[$country->getAlpha2()] = $country->getLocalName();
-        }
-        asort($countries);
-
         $templateMgr->assign('publisherName', $this->_context->getData('publisherInstitution'));
         $templateMgr->assign('reviewTypes', self::REVIEW_TYPE);
         $templateMgr->assign('oecdClassificationsList', self::OECD_CLASSIFICATION_LIST);
-        $templateMgr->assign('countries', $countries);
         $templateMgr->assign('pluginName', $this->_plugin->getName());
         $templateMgr->assign('applicationName', Application::get()->getName());
         return parent::fetch($request, $template, $display);

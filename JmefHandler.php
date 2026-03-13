@@ -257,7 +257,7 @@ class JmefHandler extends Handler {
         if ($publisher = $context->getData('publisherInstitution')) {
             $doc .= "\t<publisher>\n" .
                     "\t\t<name>" . $publisher . "</name>\n";
-            if ($countryCode = $context->getData('publisherLocation')) {
+            if ($countryCode = $context->getData('country')) {
                 $isoCodes = new \Sokil\IsoCodes\IsoCodesFactory();
                 $country = $isoCodes->getCountries()->getByAlpha2($countryCode);
                 $doc .= "\t\t<location>\n" .
@@ -267,7 +267,7 @@ class JmefHandler extends Handler {
             $doc .= "\t</publisher>\n";
         }
         $journalOwner = trim($context->getData('journalOwner'));
-        if (isset($journalOwner)) {
+        if ($journalOwner = trim($context->getData('journalOwner'))) {
             $doc .= "\t<other-organization>\n";
             $doc .= "\t\t<name>" . $journalOwner . "</name>\n";
             $doc .= "\t</other-organization>\n";
