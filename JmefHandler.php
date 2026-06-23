@@ -200,14 +200,14 @@ class JmefHandler extends Handler {
             }
             if ($supportedLocale == $context->getPrimaryLocale()) {
                 if ($title = $context->getName($supportedLocale)) {
-                    $doc .= "\t\t<title " . $titleLanguages . ">" . $title . "</title>\n";
+                    $doc .= "\t\t<title " . $titleLanguages . ">" . $this->escapeForXml($title) . "</title>\n";
                 }
                 if ($subtitle = $context->getSetting("subname", $supportedLocale)) {
-                    $doc .= "\t\t<other-title type=\"subtitle\" " . $titleLanguages . ">" . $subtitle . "</other-title>\n";
+                    $doc .= "\t\t<other-title type=\"subtitle\" " . $titleLanguages . ">" . $this->escapeForXml($subtitle) . "</other-title>\n";
                 }
             } else {
                 if ($title = $context->getName($supportedLocale)) {
-                    $doc .= "\t\t<other-title type=\"translation\" " . $titleLanguages . ">" . $title . "</other-title>\n";
+                    $doc .= "\t\t<other-title type=\"translation\" " . $titleLanguages . ">" . $this->escapeForXml($title) . "</other-title>\n";
                 }
             }
         }
@@ -257,7 +257,7 @@ class JmefHandler extends Handler {
         $doc .= "\t<organizations>\n";
         if ($publisher = $context->getData('publisherInstitution')) {
             $doc .= "\t<publisher>\n" .
-                    "\t\t<name>" . $publisher . "</name>\n";
+                    "\t\t<name>" . $this->escapeForXml($publisher) . "</name>\n";
             if ($countryCode = $context->getData('country')) {
                 $isoCodes = new \Sokil\IsoCodes\IsoCodesFactory();
                 $country = $isoCodes->getCountries()->getByAlpha2($countryCode);
@@ -270,7 +270,7 @@ class JmefHandler extends Handler {
         $journalOwner = trim($context->getData('journalOwner'));
         if ($journalOwner = trim($context->getData('journalOwner'))) {
             $doc .= "\t<other-organization>\n";
-            $doc .= "\t\t<name>" . $journalOwner . "</name>\n";
+            $doc .= "\t\t<name>" . $this->escapeForXml($journalOwner) . "</name>\n";
             $doc .= "\t</other-organization>\n";
         }
         if ($otherOrganisations = trim($context->getData('otherOrganisations'))) {
@@ -278,7 +278,7 @@ class JmefHandler extends Handler {
             foreach ($otherOrganisationsExploded as $organisation) {
                 $doc .= "\t<other-organization>\n";
                 if (trim($organisation)) {
-                    $doc .= "\t\t<name>" . $organisation . "</name>\n";
+                    $doc .= "\t\t<name>" . $this->escapeForXml($organisation) . "</name>\n";
                 }
                 $doc .= "\t</other-organization>\n";
             }
@@ -323,7 +323,7 @@ class JmefHandler extends Handler {
             $doc .= "\t<keywords>\n";
             foreach ($keywords as $keyword) {
                 if (trim($keyword)) {
-                    $doc .= "\t\t<keyword>" . $keyword . "</keyword>\n";
+                    $doc .= "\t\t<keyword>" . $this->escapeForXml($keyword) . "</keyword>\n";
                 }
             }
             $doc .= "\t</keywords>\n";
@@ -375,5 +375,16 @@ class JmefHandler extends Handler {
             }
         }
         return false;
+    }
+
+    protected function escapeForXml($value, bool $forAttribute = false): string {
+        if ($value === null || $value === '') {
+            return '';
+        }
+
+        $flags = ENT_XML1;
+        $flags |= $forAttribute ? ENT_QUOTES : ENT_NOQUOTES;
+
+        return htmlspecialchars((string) $value, $flags, 'UTF-8');
     }
 }
